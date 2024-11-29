@@ -15,3 +15,7 @@ def create_random_cube():
 
     return cube
 
+def create_random_sphere():
+    x_pos = random.uniform(-10, 10)
+    y_pos = random. uniform(0, 5)
+    z_pos = random.uniform(-10, 10)
