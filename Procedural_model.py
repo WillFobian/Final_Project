@@ -70,8 +70,9 @@ def apply_random_color(obj):
     shader = cmds.shadingNode('lambert', asShader=True)
     shading_group = cmds.setAttr(shader + ".color", random.random(), random.random(), random.random(), type="double3")
     shading_group = cmds.setAttr(shader + "SG", 1)
+    cmds.setAttr(shading_group + ".surfaceShader", shader, type="node")
     cmds.select(obj)
-    cmds.hyperShade(assign=shader)
+    cmds.hyperShade(assign=shading_group)
 
 def generate_procedural_scene(num_objects=10):
     for _ in range(num_objects):
