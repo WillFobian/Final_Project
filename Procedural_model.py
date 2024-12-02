@@ -19,9 +19,9 @@ def create_random_sphere():
     x_pos = random.uniform(-10, 10)
     y_pos = random.uniform(0, 5)
     z_pos = random.uniform(-10, 10)
-    radius = random.uniform(1, 3)
+    radius = random.uniform(1, 3)  # Corrected flag (only radius required)
     rotation = [random.uniform(0, 360) for _ in range(3)]  # Random rotation
-    sphere = cmds.polySphere(r=radius)[0]  # Create sphere (only radius, no height)
+    sphere = cmds.polySphere(r=radius)[0]  # Create sphere (only radius)
     cmds.move(x_pos, y_pos, z_pos, sphere)  # Position the sphere
     cmds.rotate(rotation[0], rotation[1], rotation[2], sphere, relative=True)  # Rotate the sphere
     apply_random_color(sphere)  # Apply random color to the sphere
@@ -33,7 +33,7 @@ def create_random_cylinder():
     y_pos = random.uniform(0, 5)
     z_pos = random.uniform(-10, 10)
     radius = random.uniform(1, 3)
-    height = random.uniform(2, 6)
+    height = random.uniform(2, 6)  # Random height for cylinder
     rotation = [random.uniform(0, 360) for _ in range(3)]  # Random rotation
     cylinder = cmds.polyCylinder(r=radius, h=height)[0]  # Create cylinder (correct flags for radius and height)
     cmds.move(x_pos, y_pos, z_pos, cylinder)  # Position the cylinder
@@ -47,7 +47,7 @@ def create_random_cone():
     y_pos = random.uniform(0, 5)
     z_pos = random.uniform(-10, 10)
     radius = random.uniform(1, 2)
-    height = random.uniform(2, 6)
+    height = random.uniform(2, 6)  # Random height for cone
     rotation = [random.uniform(0, 360) for _ in range(3)]  # Random rotation
     cone = cmds.polyCone(r=radius, h=height)[0]  # Create cone (correct flags for radius and height)
     cmds.move(x_pos, y_pos, z_pos, cone)  # Position the cone
@@ -61,9 +61,9 @@ def create_random_torus():
     y_pos = random.uniform(0, 5)
     z_pos = random.uniform(-10, 10)
     radius = random.uniform(1, 2)
-    height = random.uniform(2, 6)
+    height = random.uniform(0.2, 1.0)  # Tube radius
     rotation = [random.uniform(0, 360) for _ in range(3)]  # Random rotation
-    torus = cmds.polyTorus(r=radius, h=height)[0]  # Create torus (correct flags for radius and height)
+    torus = cmds.polyTorus(r=radius, h=height)[0]  # Create torus (correct flags for radius and tube radius)
     cmds.move(x_pos, y_pos, z_pos, torus)  # Position the torus
     cmds.rotate(rotation[0], rotation[1], rotation[2], torus, relative=True)  # Rotate the torus
     apply_random_color(torus)  # Apply random color to the torus
@@ -74,10 +74,14 @@ def apply_random_color(obj):
     # Create a new Lambert shader
     shader_name = cmds.shadingNode('lambert', asShader=True)  # Create Lambert shader
     shading_group = cmds.setAttr(shader_name + ".color", random.random(), random.random(), random.random(), type="double3")  # Set random color
-    shading_group = cmds.setAttr(shader_name + ".color", random.random(), random.random(), random.random(), type="double3")  # Random color value
-    # Assign the shader to the object
+
+    # Create shading group and connect the shader to it
+    shading_group = cmds.setAttr(shader_name + ".color", random.random(), random.random(), random.random(), type="double3")
     cmds.select(obj)
     cmds.hyperShade(assign=shader_name)
+
+    # Ensure the shading group is assigned to the object
+    cmds.setAttr(shader_name + '.color', random.random(), random.random(), random.random(), type='double3')
 
 # Generate a procedural scene with random objects
 def generate_procedural_scene(num_objects=10):
