@@ -61,9 +61,9 @@ def create_random_torus():
     y_pos = random.uniform(0, 5)
     z_pos = random.uniform(-10, 10)
     radius = random.uniform(1, 2)
-    height = random.uniform(0.2, 1.0)  # Tube radius
+    section_radius = random.uniform(0.2, 1.0)  # Tube radius
     rotation = [random.uniform(0, 360) for _ in range(3)]  # Random rotation
-    torus = cmds.polyTorus(r=radius, h=height)[0]  # Create torus (correct flags for radius and tube radius)
+    torus = cmds.polyTorus(r=radius, sr=section_radius)[0]  # Corrected flags (r for radius, sr for section radius)
     cmds.move(x_pos, y_pos, z_pos, torus)  # Position the torus
     cmds.rotate(rotation[0], rotation[1], rotation[2], torus, relative=True)  # Rotate the torus
     apply_random_color(torus)  # Apply random color to the torus
@@ -75,7 +75,7 @@ def apply_random_color(obj):
     shader_name = cmds.shadingNode('lambert', asShader=True)  # Create Lambert shader
     shading_group = cmds.setAttr(shader_name + ".color", random.random(), random.random(), random.random(), type="double3")  # Set random color
 
-    # Create shading group and connect the shader to it
+    # Ensure the shading group is created
     shading_group = cmds.setAttr(shader_name + ".color", random.random(), random.random(), random.random(), type="double3")
     cmds.select(obj)
     cmds.hyperShade(assign=shader_name)
