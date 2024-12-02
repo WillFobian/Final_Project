@@ -24,7 +24,21 @@ def create_random_sphere():
     sphere = cmds.polySphere(r=radius)[0]
     cmds.move(x_pos, y_pos, z_pos, sphere)
     cmds.rotate(rotation[0], rotation[1], rotation[2], sphere)
+    apply_random_color(sphere)
+    return sphere
 
+def create_random_cylinder():
+    x_pos = random.uniform(-10, 10)
+    y_pos = random.uniform(0, 5)
+    z_pos = random.uniform(-10, 10)
+    radius = random.uniform(1, 3)
+    height = random.uniform(2, 6)
+    rotation = [random.uniform(0, 360) for _ in range(3)]
+    cylinder = cmds.polyCylinder(r=radius, h=height)[0]
+    cmds.move(x_pos, y_pos, z_pos, cylinder)
+    cmds.rotate(rotation[0], rotation[1], rotation[2], cylinder)
+    apply_random_color(cylinder)
+    return cylinder
 
 
 
