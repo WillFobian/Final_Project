@@ -66,11 +66,24 @@ def create_random_torus():
     apply_random_color(torus)
     return torus
 
-
-
-
 def apply_random_color(obj):
     shader = cmds.shadingNode('lambert', asShader=True)
     shading_group = cmds.setAttr(shader + ".color", random.random(), random.random(), random.random(), type="double3")
     cmds.select(obj)
     cmds.hyperShade(assign=shader)
+
+def generate_procedural_scene(num_objects=10):
+    for _ in range(num_objects):
+        shape_type = random.choice(['cube', 'sphere', 'cylinder', 'cone', 'torus'])
+        if shape_type == 'cube':
+            create_random_cube()
+        elif shape_type == 'sphere':
+            create_random_sphere()
+        elif shape_type == 'torus':
+            create_random_torus()
+        elif shape_type == 'cylinder':
+            create_random_cylinder()
+        elif shape_type == 'cone':
+            create_random_cone()
+        
+
