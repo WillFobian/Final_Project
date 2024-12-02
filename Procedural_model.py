@@ -40,6 +40,33 @@ def create_random_cylinder():
     apply_random_color(cylinder)
     return cylinder
 
+def create_random_cone():
+    x_pos = random.uniform(-10, 10)
+    y_pos = random.uniform(0, 5)
+    z_pos = random.uniform(-10, 10)
+    radius = random.uniform(1, 2)
+    height = random.uniform(2, 6)
+    rotation = [random.uniform(0, 360) for _ in range(3)]
+    cone = cmds.polyCone(r=radius, h=height)[0]
+    cmds.move(x_pos, y_pos, z_pos, cone)
+    cmds.rotate(rotation[0], rotation[1], rotation[2], cone)
+    apply_random_color(cone)
+    return cone
+
+def create_random_torus():
+    x_pos = random.uniform(-10, 10)
+    y_pos = random.uniform(0, 5)
+    z_pos = random.uniform(-10, 10)
+    radius = random.uniform(1, 2)
+    height = random.uniform(2, 6)
+    rotation = [random.uniform(0, 360) for _ in range(3)]
+    torus = cmds.polyTorus(r=radius, h=height)[0]
+    cmds.move(x_pos, y_pos, z_pos, torus)
+    cmds.rotate(rotation[0], rotation[1], rotation[2], torus)
+    apply_random_color(torus)
+    return torus
+
+
 
 
 def apply_random_color(obj):
