@@ -21,7 +21,7 @@ def create_random_sphere():
     z_pos = random.uniform(-10, 10)
     radius = random.uniform(1, 3)
     rotation = [random.uniform(0, 360) for _ in range(3)]  # Random rotation
-    sphere = cmds.polySphere(r=radius)[0]  # Create sphere
+    sphere = cmds.polySphere(r=radius)[0]  # Create sphere (only radius, no height)
     cmds.move(x_pos, y_pos, z_pos, sphere)  # Position the sphere
     cmds.rotate(rotation[0], rotation[1], rotation[2], sphere, relative=True)  # Rotate the sphere
     apply_random_color(sphere)  # Apply random color to the sphere
@@ -35,7 +35,7 @@ def create_random_cylinder():
     radius = random.uniform(1, 3)
     height = random.uniform(2, 6)
     rotation = [random.uniform(0, 360) for _ in range(3)]  # Random rotation
-    cylinder = cmds.polyCylinder(r=radius, h=height)[0]  # Create cylinder
+    cylinder = cmds.polyCylinder(r=radius, h=height)[0]  # Create cylinder (correct flags for radius and height)
     cmds.move(x_pos, y_pos, z_pos, cylinder)  # Position the cylinder
     cmds.rotate(rotation[0], rotation[1], rotation[2], cylinder, relative=True)  # Rotate the cylinder
     apply_random_color(cylinder)  # Apply random color to the cylinder
@@ -49,7 +49,7 @@ def create_random_cone():
     radius = random.uniform(1, 2)
     height = random.uniform(2, 6)
     rotation = [random.uniform(0, 360) for _ in range(3)]  # Random rotation
-    cone = cmds.polyCone(r=radius, h=height)[0]  # Create cone
+    cone = cmds.polyCone(r=radius, h=height)[0]  # Create cone (correct flags for radius and height)
     cmds.move(x_pos, y_pos, z_pos, cone)  # Position the cone
     cmds.rotate(rotation[0], rotation[1], rotation[2], cone, relative=True)  # Rotate the cone
     apply_random_color(cone)  # Apply random color to the cone
@@ -63,7 +63,7 @@ def create_random_torus():
     radius = random.uniform(1, 2)
     height = random.uniform(2, 6)
     rotation = [random.uniform(0, 360) for _ in range(3)]  # Random rotation
-    torus = cmds.polyTorus(r=radius, h=height)[0]  # Create torus
+    torus = cmds.polyTorus(r=radius, h=height)[0]  # Create torus (correct flags for radius and height)
     cmds.move(x_pos, y_pos, z_pos, torus)  # Position the torus
     cmds.rotate(rotation[0], rotation[1], rotation[2], torus, relative=True)  # Rotate the torus
     apply_random_color(torus)  # Apply random color to the torus
