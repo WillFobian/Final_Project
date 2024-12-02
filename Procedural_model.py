@@ -1,6 +1,5 @@
 import maya.cmds as cmds
 import random
-import math
 
 def create_random_cube():
     x_pos = random.uniform(-10, 10)
