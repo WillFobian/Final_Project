@@ -69,17 +69,15 @@ def create_random_torus():
     apply_random_color(torus)  # Apply random color to the torus
     return torus
 
-# Apply a random color to the default Lambert shader (lambert1)
+# Apply a random color to a new Lambert shader for each object
 def apply_random_color(obj):
-    # Apply a random color to the default Lambert shader (lambert1)
-    random_color = (random.random(), random.random(), random.random())
-    
-    # Apply the random color to lambert1 (the default shader)
-    cmds.setAttr("lambert1.color", random_color[0], random_color[1], random_color[2], type="double3")
-    
-    # Assign the default lambert1 shader to the object
+    # Create a new Lambert shader
+    shader_name = cmds.shadingNode('lambert', asShader=True)  # Create Lambert shader
+    shading_group = cmds.setAttr(shader_name + ".color", random.random(), random.random(), random.random(), type="double3")  # Set random color
+    shading_group = cmds.setAttr(shader_name + ".color", random.random(), random.random(), random.random(), type="double3")  # Random color value
+    # Assign the shader to the object
     cmds.select(obj)
-    cmds.hyperShade(assign="lambert1")
+    cmds.hyperShade(assign=shader_name)
 
 # Generate a procedural scene with random objects
 def generate_procedural_scene(num_objects=10):
